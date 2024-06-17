@@ -24,10 +24,10 @@ public class PlayerController : MonoBehaviour
     }
 
     //≤‚ ‘
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        Debug.Log(other.name);
-    }
+    //private void OnTriggerStay2D(Collider2D other)
+    //{
+    //    Debug.Log(other.name);
+    //}
 
     private void OnEnable()
     {
