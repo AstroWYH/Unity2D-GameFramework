@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
         physicsCheck = GetComponent<PhysicsCheck>();
     }
 
+    //≤‚ ‘
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        Debug.Log(other.name);
+    }
+
     private void OnEnable()
     {
         inputControl.Enable();
