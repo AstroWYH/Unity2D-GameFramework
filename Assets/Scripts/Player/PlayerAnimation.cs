@@ -7,12 +7,14 @@ public class PlayerAnimation : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
     private PhysicsCheck physicsCheck;
+    private PlayerController playerController;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
+        playerController = GetComponent<PlayerController>();
     }
 
     private void Update()
@@ -25,5 +27,12 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("velocityX", Mathf.Abs(rb.velocity.x));
         anim.SetFloat("velocityY", rb.velocity.y);
         anim.SetBool("isGround", physicsCheck.isGround);
+        anim.SetBool("isDead", playerController.isDead);
+    }
+
+    // 因为是一次性触发，所以不在Update。去触发动画播放
+    public void PlayHurt()
+    {
+        anim.SetTrigger("hurt");
     }
 }

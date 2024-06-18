@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 0.0f;
     public Vector2 inputDirection;
     private PhysicsCheck physicsCheck;
+    public float hurtForce;
+    public bool isHurt;
+    public bool isDead;
 
     private void Awake()
     {
@@ -46,7 +49,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (!isHurt)
+            Move();
     }
 
     public void Move()
@@ -70,5 +74,21 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         }
+    }
+
+    // ´¥·¢·´µ¯
+    public void GetHurt(Transform attacker)
+    {
+        isHurt = true;
+        rb.velocity = Vector2.zero;
+        Vector2 dir = new Vector2((transform.position.x - attacker.position.x), 0).normalized;
+
+        rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
+    }
+
+    public void PlayerDead()
+    {
+        isDead = true;
+        inputControl.Gameplay.Disable();
     }
 }

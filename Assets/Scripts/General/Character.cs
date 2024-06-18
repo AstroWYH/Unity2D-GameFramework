@@ -14,6 +14,9 @@ public class Character : MonoBehaviour
     [HideInInspector] public float invulnerableCounter;
     public bool invulnerable;
 
+    public UnityEvent<Transform> OnTakeDamage;
+    public UnityEvent OnDie;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -40,11 +43,15 @@ public class Character : MonoBehaviour
         if (currentHealth - attacker.damage > 0)
         {
             currentHealth -= attacker.damage;
+            //÷¥–– ‹…À
+            OnTakeDamage?.Invoke(attacker.transform);
             TriggerInvulnerable();
         }
         else
         {
             currentHealth = 0;
+            //¥•∑¢À¿Õˆ
+            OnDie?.Invoke();
         }
     }
 
