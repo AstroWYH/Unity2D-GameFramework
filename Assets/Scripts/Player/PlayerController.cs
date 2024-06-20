@@ -13,17 +13,23 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 0.0f;
     public Vector2 inputDirection;
     private PhysicsCheck physicsCheck;
+    private PlayerAnimation playerAnimation;
     public float hurtForce;
+    [Header("×´Ì¬")]
     public bool isHurt;
     public bool isDead;
+    public bool isAttack;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        physicsCheck = GetComponent<PhysicsCheck>();
+        playerAnimation = GetComponent<PlayerAnimation>();
         inputControl = new PlayerInputControls();
         //ÌøÔ¾
         inputControl.Gameplay.Jump.started += Jump;
-        physicsCheck = GetComponent<PhysicsCheck>();
+        //¹¥»÷
+        inputControl.Gameplay.Attack.started += PlayerAttack;
     }
 
     //²âÊÔ
@@ -73,6 +79,15 @@ public class PlayerController : MonoBehaviour
         if (physicsCheck.isGround)
         {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    private void PlayerAttack(InputAction.CallbackContext obj)
+    {
+        if (physicsCheck.isGround)
+        {
+            playerAnimation.PlayAttack();
+            isAttack = true;
         }
     }
 

@@ -28,11 +28,17 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("velocityY", rb.velocity.y);
         anim.SetBool("isGround", physicsCheck.isGround);
         anim.SetBool("isDead", playerController.isDead);
+        anim.SetBool("isAttack", playerController.isAttack);
     }
 
     // 因为是一次性触发，所以不在Update。去触发动画播放
     public void PlayHurt()
     {
         anim.SetTrigger("hurt");
+    }
+
+    public void PlayAttack()
+    {
+        anim.SetTrigger("attack");
     }
 }
