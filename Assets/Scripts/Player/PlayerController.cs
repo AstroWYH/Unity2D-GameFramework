@@ -13,17 +13,22 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 0.0f;
     public Vector2 inputDirection;
     private PhysicsCheck physicsCheck;
+    private CapsuleCollider2D coll;
     private PlayerAnimation playerAnimation;
     public float hurtForce;
     [Header("◊¥Ã¨")]
     public bool isHurt;
     public bool isDead;
     public bool isAttack;
+    [Header("ŒÔ¿Ì≤ƒ÷ ")]
+    public PhysicsMaterial2D normal;
+    public PhysicsMaterial2D wall;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
+        coll = GetComponent<CapsuleCollider2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
         inputControl = new PlayerInputControls();
         //Ã¯‘æ
@@ -32,7 +37,7 @@ public class PlayerController : MonoBehaviour
         inputControl.Gameplay.Attack.started += PlayerAttack;
     }
 
-    //≤‚ ‘
+    //≤‚ ‘Trigger
     //private void OnTriggerStay2D(Collider2D other)
     //{
     //    Debug.Log(other.name);
@@ -51,12 +56,19 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         inputDirection = inputControl.Gameplay.Move.ReadValue<Vector2>();
+
+        CheckState();
     }
 
     private void FixedUpdate()
     {
         if (!isHurt)
             Move();
+    }
+
+    private void CheckState()
+    {
+        coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
     }
 
     public void Move()
