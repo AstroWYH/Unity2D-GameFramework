@@ -1330,15 +1330,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   currentHealth: 50
-  invulnerableDuration: 1
+  invulnerableDuration: 0.1
   invulnerableCounter: 0
   invulnerable: 0
   OnTakeDamage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1191676841}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnTakeDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDie:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1191676841}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1191676841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1358,9 +1382,13 @@ MonoBehaviour:
   chaseSpeed: 260
   currentSpeed: 0
   faceDir: {x: 0, y: 0, z: 0}
+  attacker: {fileID: 0}
+  hurtForce: 4.5
   waitTime: 2
   waitTimeCounter: 2
   wait: 0
+  isHurt: 0
+  isDead: 0
 --- !u!95 &1191676842
 Animator:
   serializedVersion: 5
@@ -5649,7 +5677,7 @@ Tilemap:
       - {fileID: 2000875529, guid: 62dae9a990f4e1848a6bd162d5ddb2b7, type: 3}
       - {fileID: -344035425, guid: 62dae9a990f4e1848a6bd162d5ddb2b7, type: 3}
       - {fileID: 1717054471, guid: 62dae9a990f4e1848a6bd162d5ddb2b7, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -8, y: 0, z: 0}
@@ -5693,7 +5721,7 @@ Tilemap:
       - {fileID: 11058416, guid: 62dae9a990f4e1848a6bd162d5ddb2b7, type: 3}
       - {fileID: 849789498, guid: 62dae9a990f4e1848a6bd162d5ddb2b7, type: 3}
       - {fileID: -1042498595, guid: 62dae9a990f4e1848a6bd162d5ddb2b7, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -7, y: 1, z: 0}
